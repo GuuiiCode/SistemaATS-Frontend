@@ -9,86 +9,86 @@ import { CandidatoService } from '../services/candidato.services';
 export class CandidatoComponent implements OnInit {
 
   candidatos: any[] = [];
-  // candidato: any = {}; 
-  // userLogged: any = {};
-  // showList: boolean = true; 
+  candidato: any = {};  
+  showList: boolean = true; 
 
-  constructor(private candidatoDataService: CandidatoService) { }
+  constructor(private candidatoService: CandidatoService) { }
 
   ngOnInit() {
     this.get();
   }
 
   get() {
-    this.candidatoDataService.get().subscribe((data:any[]) => {
+    this.candidatoService.get().subscribe((data:any[]) => {
       this.candidatos = data;
-      // this.showList = true;
+      this.showList = true;
     }, error => {
         console.log(error);
         alert('erro interno do sistema');
     })
   }
 
-  // save() {
-  //   if (this.candidato.id) {
-  //     this.put();
-  //   } else {
-  //     this.post();
-  //   }    
-  // }
+  salvar() {
+    if(this.candidato.id){
+      this.put();
+    }else{
+      this.post();
+    }
+  }
 
-  // openDetails(user) {
-  //   this.showList = false;
-  //   this.candidato = user;
-  // }
+  limparCampos() {
+    this.showList = !this.showList;
+    this.candidato = {};
+  }
 
-  // post() {
-  //   this.candidatoDataService.post(this.candidato).subscribe(data => {
-  //     if (data) {
-  //       alert('Usuário cadastrado com sucesso');
-  //       this.get();
-  //       this.candidato = {};
-  //     } else {
-  //       alert('Erro ao cadastrar usuário');
-  //     }
-  //   }, error => {
-  //     console.log(error);
-  //     alert('erro interno do sistema');
-  //   })
-  // }
+  mostrar(candidato) { 
+    this.showList = false;
+    this.candidato = candidato;
+  }
 
-  // put() {
-  //   this.candidatoDataService.put(this.candidato).subscribe(data => {
-  //     if (data) {
-  //       alert('Usuário atualizado com sucesso');
-  //       this.get();
-  //       this.candidato = {};
-  //     } else {
-  //       alert('Erro ao atualizar usuário');
-  //     }
-  //   }, error => {
-  //     console.log(error);
-  //     alert('erro interno do sistema');
-  //   })
-  // }
+  post(){
+    this.candidatoService.post(this.candidato).subscribe(data => {
+      if (data) {
+        alert('Candidato cadastrado com sucesso');
+        this.get();
+        this.candidato = {};
+      } else {
+        alert('Erro ao cadastrar candidato');
+      }
+    }, error => {
+      console.log(error);
+      alert('erro interno do sistema');
+    })
+  }
 
-  // delete() {
-  //   this.candidatoDataService.delete().subscribe(data => {
-  //     if (data) {
-  //       alert('Usuário excluído com sucesso');
-  //       this.get();
-  //       this.candidato = {};
-  //     } else {
-  //       alert('Erro ao excluir usuário');
-  //     }
-  //   }, error => {
-  //     console.log(error);
-  //     alert('erro interno do sistema');
-  //   })
-  // }
+  put(){
+    this.candidatoService.put(this.candidato).subscribe(data => {
+      if (data) {
+        alert('Candidato cadastrado com sucesso');
+        this.get();
+        this.candidato = {};
+      } else {
+        alert('Erro ao cadastrar candidato');
+      }
+    }, error => {
+      console.log(error);
+      alert('erro interno do sistema');
+    })
+  }
+
+  delete(candidato){
+    this.candidatoService.delete(candidato.id).subscribe(data => {
+      if(data){
+        alert('Candidado excluído com sucesso');
+        this.get();
+        this.candidato = {};
+      } else {
+        alert('Erro ao excluir candidato');
+      }
+    }, error => {
+      console.log(error);
+      alert('erro interno do sistema');
+    })
+  }
   
-  // getUserData() {
-  //   this.userLogged = JSON.parse(localStorage.getItem('user_logged')); 
-  // }
-
 }

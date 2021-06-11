@@ -20,8 +20,8 @@ export class CandidatoService {
     return this.http.put(this.module, data);
   }
 
-  delete() {
-    return this.http.delete(this.module);
+  delete(id) {
+    return this.http.delete(this.module + '/' + id);
   }
  
 }

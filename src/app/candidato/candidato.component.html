@@ -1,89 +1,65 @@
-<p>Candidatos {{ candidatos?.length }}</p>
+<button class="btn btn-primary mb-3" (click)="limparCampos()"  >
+  {{showList ? 'Cadastrar Candidato' : 'Lista de Candidatos'}}
+</button>
 
-<table class="table">
-  <thead class="thead-dark">
-    <tr>
-      <th scope="col">ID</th>
-      <th scope="col">Nome</th>
-      <th scope="col">Email</th>
-      <th scope="col">Telefone</th>
-      <th scope="col">Genero</th>
-      <th scope="col">Data Nascimento</th> 
-      <th scope="col">Ação</th> 
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let candidato of candidatos">
-      <th scope="row">{{candidato.id}}</th>
-      <td>{{candidato.nome}}</td>
-      <td>{{candidato.email}}</td>
-      <td>{{candidato.telefone}}</td>
-      <td>{{candidato.genero}}</td>
-      <td>{{candidato.dataNascimento}}</td>
-      <td><button class="btn btn-warning">Editar</button></td>
-    </tr> 
-  </tbody>
-</table>
+<div *ngIf="showList">
+  <table class="table">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Nome</th>
+        <th scope="col">Email</th>
+        <th scope="col">Telefone</th>
+        <th scope="col">Genero</th>
+        <th scope="col">Data Nascimento</th> 
+        <th scope="col">Ação</th> 
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let candidato of candidatos">
+        <th scope="row">{{candidato.id}}</th>
+        <td>{{candidato.nome}}</td>
+        <td>{{candidato.email}}</td>
+        <td>{{candidato.telefone}}</td>
+        <td>{{candidato.genero}}</td>
+        <td>{{candidato.dataNascimento}}</td>
+        <td>
+          <button class="btn btn-warning mr-3" (click)="mostrar(candidato)">Editar</button>
+          <button class="btn btn-danger" (click)="delete(candidato)">Deletar</button>
+        </td> 
+      </tr> 
+    </tbody>
+  </table>
+</div>
 
-
-
-<!-- <p *ngIf="isAuthenticated">Welcome ({{userLogged?.user?.name}})</p> -->
-<!-- <button class="btn-primary" (click)="showList = !showList">{{showList ? 'Novo usuário' : 'Lista de Usuários'}}</button> -->
-<!-- <p *ngIf="isAuthenticated">Users ({{users?.length}})</p> -->
-<!-- <div *ngIf="showList"> -->
-  <!-- <div *ngIf="isAuthenticated"> -->
-    <!-- <table class="table">
-      <thead>
-        <tr>
-          <th scope="col">Actions</th>
-          <th scope="col">ID</th>
-          <th scope="col">Name</th>
-          <th scope="col">Email</th>
-
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let candidato of candidatos">
-          <th scope="row">
-            <button class="btn-primary" (click)="openDetails(candidato)">Editar</button>
-            <button class="btn-danger" (click)="delete(candidato)">Excluir</button>
-          </th>
-          <th scope="row">{{candidato.id}}</th>
-          <th scope="row">{{candidato.nome}}</th>
-          <th scope="row">{{candidato.email}}</th>
-        </tr>
-      </tbody>
-    </table> -->
-  <!-- </div> -->
-<!-- </div> -->
-<!-- <div *ngIf="!showList">
-  <form>
-    <div class="form-group">
-      <label for="exampleInputName">Name:</label>
-      <input type="text" class="form-control" id="exampleInputName" aria-describedby="emailHelp" placeholder="Name" [(ngModel)]="user.name" name="name">
+<div *ngIf="!showList"> 
+  <form >
+    <div class="row justify-content-center">
+      <div class="col-6">
+        <div class="form-group">
+          <label for="nome">Nome:</label>
+          <input type="text" class="form-control" id="nome" placeholder="Nome" [(ngModel)]="candidato.nome" name="nome">
+        </div>
+        <div class="form-group">
+          <label for="email">Email:</label>
+          <input type="email" class="form-control" id="email" placeholder="Email" [(ngModel)]="candidato.email" name="email">
+        </div>
+        <div class="form-group">
+          <label for="telefone">Telefone:</label>
+          <input type="text" class="form-control" id="telefone" placeholder="Telefone" [(ngModel)]="candidato.telefone" name="telefone">
+        </div>
+        <div class="form-group">
+          <label for="genero">Genero:</label>
+          <input type="text" class="form-control" id="genero" placeholder="Genero (M) ou (F)" [(ngModel)]="candidato.genero" name="genero">
+        </div>
+        <div class="form-group">
+          <label for="dataNascimento">Data Nascimento:</label>
+          <input type="text" class="form-control" id="dataNascimento" placeholder="05/10/1998" [(ngModel)]="candidato.dataNascimento" name="dataNascimento">
+        </div>
+        <div class="d-flex justify-content-end">
+          <button type="submit" class="btn btn-success" (click)="salvar()">Cadastrar</button>
+        </div> 
+      </div>
     </div>
-    <div class="form-group">
-      <label for="exampleInputEmail">Email:</label>
-      <input type="email" class="form-control" id="exampleInputEmail" placeholder="Email" [(ngModel)]="user.email" name="email">
-    </div>
-    <div class="form-group">
-      <label for="exampleInputEmail">Password:</label>
-      <input type="password" class="form-control" id="exampleInputPassword" placeholder="Password" [(ngModel)]="user.password" name="password">
-    </div>
-    <button type="submit" class="btn btn-primary" (click)="save()">Save</button>
   </form>
-</div> -->
-
-<!-- <div *ngIf="!isAuthenticated && showList"> -->
-  <!-- <form>
-    <div class="form-group">
-      <label for="exampleInputEmail">Email:</label>
-      <input type="email" class="form-control" id="exampleInputEmail" placeholder="Email" [(ngModel)]="userLogin.email" name="email">
-    </div>
-    <div class="form-group">
-      <label for="exampleInputEmail">Password:</label>
-      <input type="text" class="form-control" id="exampleInputPassword" placeholder="Password" [(ngModel)]="userLogin.password" name="password">
-    </div>
-    <button type="submit" class="btn btn-primary" (click)="authenticate()">Login</button>
-  </form> -->
-<!-- </div> -->
+</div>
