@@ -14,3 +14,10 @@ Para rodar a aplicação em sua maquina será necessário seguir as seguintes et
  2. No terminal dentro da pasta do projeto em que você acabou de baixar executar o comando `npm install`. 
  
  3. Após ter baixado o pacote do ***node_modules***  é só executar o comando `ng serve --port 4200` 
+
+# Telas
+
+![image](https://user-images.githubusercontent.com/27358198/121666124-4e679280-ca7f-11eb-9f47-b86c731f885d.png)
+
+![image](https://user-images.githubusercontent.com/27358198/121666221-6212f900-ca7f-11eb-9799-3bb65e50202c.png)
+
