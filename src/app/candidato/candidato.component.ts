@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CandidatoService } from '../services/candidato.services';
 
 @Component({
@@ -8,14 +9,31 @@ import { CandidatoService } from '../services/candidato.services';
 })
 export class CandidatoComponent implements OnInit {
 
+  form: FormGroup;
   candidatos: any[] = [];
   candidato: any = {};  
   showList: boolean = true; 
 
-  constructor(private candidatoService: CandidatoService) { }
+  constructor(private formBuilder: FormBuilder,
+              private candidatoService: CandidatoService) { }
 
   ngOnInit() {
     this.get();
+    this.validacaoFormulario();
+  }
+
+  teste(event){
+    console.log(event.target.value);
+  }
+  
+  validacaoFormulario(){
+    this.form = this.formBuilder.group({
+      nome: [null, [Validators.required, Validators.minLength(3), Validators.maxLength(100)]],
+      email: [null, [Validators.required, Validators.email]],
+      telefone: [null, [Validators.required, Validators.maxLength(14)]],
+      genero: [],
+      dataNascimento: [null, [Validators.required, Validators.minLength(10)]]
+    });
   }
 
   get() {
@@ -39,6 +57,7 @@ export class CandidatoComponent implements OnInit {
   limparCampos() {
     this.showList = !this.showList;
     this.candidato = {};
+    this.validacaoFormulario();
   }
 
   mostrar(candidato) { 

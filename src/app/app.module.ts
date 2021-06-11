@@ -5,9 +5,9 @@ import { AppComponent } from './app.component';
 import { CandidatoComponent } from './candidato/candidato.component';
 import { HomeComponent } from './home/home.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CandidatoService } from './services/candidato.services';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 
 @NgModule({
@@ -18,9 +18,10 @@ import { RouterModule } from '@angular/router';
     NavMenuComponent
   ],
   imports: [
-    BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
-    HttpClientModule,
+    BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }), 
+    ReactiveFormsModule,
     FormsModule,
+    HttpClientModule,
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },
       { path: 'candidato', component: CandidatoComponent },

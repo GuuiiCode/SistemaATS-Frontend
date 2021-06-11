@@ -33,31 +33,59 @@
 </div>
 
 <div *ngIf="!showList"> 
-  <form >
+  <form [formGroup]="form">
     <div class="row justify-content-center">
       <div class="col-6">
-        <div class="form-group">
+        <div class="form-group" >
           <label for="nome">Nome:</label>
-          <input type="text" class="form-control" id="nome" placeholder="Nome" [(ngModel)]="candidato.nome" name="nome">
+          <input type="text" class="form-control" id="nome" placeholder="Nome" [(ngModel)]="candidato.nome" formControlName="nome" 
+          [ngClass]="{'is-invalid': form.get('nome').touched && form.get('nome').invalid }">
+          <div *ngIf="form.get('nome').touched && form.get('nome').invalid" class="invalid-feedback"> 
+            <div *ngIf="form.get('nome').errors.required">Nome é obrigatório</div>
+            <div *ngIf="form.get('nome').errors.minlength">Mínimo 2 caracteres </div>
+            <div *ngIf="form.get('nome').errors.maxlength">Máximo 100 caracteres</div>
+          </div>
         </div>
         <div class="form-group">
           <label for="email">Email:</label>
-          <input type="email" class="form-control" id="email" placeholder="Email" [(ngModel)]="candidato.email" name="email">
+          <input type="email" class="form-control" id="email" placeholder="Email" [(ngModel)]="candidato.email" 
+          formControlName="email" [ngClass]="{'is-invalid': form.get('email').touched && form.get('email').invalid }">
+          <div *ngIf="form.get('email').touched && form.get('email').invalid" class="invalid-feedback">
+            <div *ngIf="form.get('email').errors.required">Email é obrigatório</div>
+            <div *ngIf="form.get('email').errors.email">Email invalido</div>
+          </div>
         </div>
         <div class="form-group">
           <label for="telefone">Telefone:</label>
-          <input type="text" class="form-control" id="telefone" placeholder="Telefone" [(ngModel)]="candidato.telefone" name="telefone">
-        </div>
+          <input type="text" class="form-control" id="telefone" placeholder="Telefone" [(ngModel)]="candidato.telefone" 
+          formControlName="telefone" [ngClass]="{'is-invalid': form.get('telefone').touched && form.get('telefone').invalid }" >
+          <div *ngIf="form.get('telefone').touched && form.get('telefone').invalid" class="invalid-feedback"> 
+            <div *ngIf="form.get('telefone').errors.required">Telefone é obrigatório</div>
+            <div *ngIf="form.get('telefone').errors.maxlength">Máximo 14 caracteres</div>
+          </div>
+        </div> 
         <div class="form-group">
-          <label for="genero">Genero:</label>
-          <input type="text" class="form-control" id="genero" placeholder="Genero (M) ou (F)" [(ngModel)]="candidato.genero" name="genero">
-        </div>
+          <label for="dataNascimento">Data de Nascimento:</label>
+          <input type="text" class="form-control" id="dataNascimento" placeholder="01/01/2000" [(ngModel)]="candidato.dataNascimento" 
+          formControlName="dataNascimento" [ngClass]="{'is-invalid': form.get('dataNascimento').touched && form.get('dataNascimento').invalid }"> 
+          <div *ngIf="form.get('dataNascimento').touched && form.get('dataNascimento').invalid" class="invalid-feedback"> 
+            <div *ngIf="form.get('dataNascimento').errors.required">Data de Nascimento é obrigatório</div>
+            <div *ngIf="form.get('dataNascimento').errors.minlength">Mínimo 10 caracteres</div>
+          </div>
+        </div> 
         <div class="form-group">
-          <label for="dataNascimento">Data Nascimento:</label>
-          <input type="text" class="form-control" id="dataNascimento" placeholder="05/10/1998" [(ngModel)]="candidato.dataNascimento" name="dataNascimento">
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="genero" FormControlName="genero" [ngModelOptions]="{standalone: true}" id="genero1" value="Masculino" [(ngModel)]="candidato.genero">
+            <label class="form-check-label" for="genero1">Masculino</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="genero" FormControlName="genero" [ngModelOptions]="{standalone: true}" id="genero2" value="Feminino" [(ngModel)]="candidato.genero">
+            <label class="form-check-label" for="genero2">Feminino</label>
+          </div>
         </div>
+
         <div class="d-flex justify-content-end">
-          <button type="submit" class="btn btn-success" (click)="salvar()">Cadastrar</button>
+          <button type="submit" class="btn btn-success" (click)="salvar()" [disabled]="!form.valid">Cadastrar</button>
         </div> 
       </div>
     </div>
