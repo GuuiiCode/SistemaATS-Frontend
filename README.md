@@ -1,31 +1,16 @@
-<<<<<<< HEAD
-# SistemasATS
+# Sistema ATS
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.1.6.
+ATS é uma sigla que tem origem do termo em inglês _Applicant Tracking System_ ou, em português, “Sistema de Rastreamento de Candidatos”. 
 
-## Development server
+##
+**[Link do repositório back-end](https://github.com/GuuiiCode/SistemaATS-Backend)**
+##
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+# Aplicação em Angular versão 10.1.6
+Para rodar a aplicação em sua maquina será necessário seguir as seguintes etapas:
 
-## Code scaffolding
-
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
-=======
-# SistemaATS-Frontend
->>>>>>> ee449614ceaee392c97bf7225bf27246ab2e0d7e
+ 1. Dentro do projeto na pasta de ***app/services***  mudar a configuração de `module: string = 'https://localhost:44396/v1/api/candidato';`para a porta em que a aplicação do back-end está rodando.
+ 
+ 2. No terminal dentro da pasta do projeto em que você acabou de baixar executar o comando `npm install`. 
+ 
+ 3. Após ter baixado o pacote do ***node_modules***  é só executar o comando `ng serve --port 4200` 
