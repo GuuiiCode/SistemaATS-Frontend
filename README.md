@@ -21,5 +21,4 @@ Para rodar a aplicação em sua maquina será necessário seguir as seguintes et
 
 ![image](https://user-images.githubusercontent.com/27358198/121666221-6212f900-ca7f-11eb-9799-3bb65e50202c.png)
 
-![image](https://user-images.githubusercontent.com/27358198/121666221-6212f900-ca7f-11eb-9799-3bb65e50202c.png)
-
+![image](https://user-images.githubusercontent.com/27358198/148444986-d9aeb929-abae-4a03-a556-13c025ae677b.png)
